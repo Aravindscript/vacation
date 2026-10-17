@@ -1,0 +1,751 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, Arial, sans-serif;
+  color: #f5f7fc;
+  background: #05091f;
+  font-synthesis: none;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.app-shell {
+  min-height: 100vh;
+  overflow: hidden;
+  color: #f5f7fc;
+  background:
+    radial-gradient(ellipse at 24% 36%, #10204e 0%, transparent 42%),
+    linear-gradient(125deg, #070b22, #05091f 70%, #09153a);
+}
+
+.navbar {
+  min-height: 78px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #20264d;
+}
+
+.brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 35px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.brand span {
+  color: #9fe7c4;
+}
+
+.nav-caption,
+.modal-eyebrow {
+  color: #c6ccdb;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.nav-book-button {
+  padding: 11px 17px;
+  color: #f7f3d5;
+  border: 1px solid #4c4e8e;
+  border-radius: 9px;
+  background: #171b4d;
+}
+
+.main-layout {
+  width: min(1000px, 88%);
+  margin: 0 auto;
+  padding: 65px 0 78px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.72fr);
+  align-items: center;
+  gap: clamp(34px, 6vw, 76px);
+}
+
+.experience-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  width: fit-content;
+  margin: 0 auto 40px;
+  padding: 5px;
+  border-radius: 9px;
+  background: #11173e;
+  box-shadow: 0 10px 28px #0003;
+}
+
+.experience-tabs button {
+  min-width: 112px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #a9b4dc;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  transition: background .25s, color .25s;
+}
+
+.experience-tabs button.active {
+  background: #f1edce;
+  color: #171b3c;
+  box-shadow: 0 2px 10px #0002;
+}
+
+.card-stage {
+  position: relative;
+  perspective: 1100px;
+  padding: 32px 0 0;
+  animation: card-enter .45s ease both;
+}
+
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(13px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.experience-card {
+  position: relative;
+  width: min(100%, 330px);
+  margin: 0 auto;
+  color: #171a32;
+  background: #fff;
+  border-radius: 19px;
+  box-shadow: 0 24px 60px #0004;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 30px 70px #0006;
+}
+
+/* The scene clips only its background. Floating cutout PNGs can leave it. */
+.scene {
+  position: relative;
+  height: 205px;
+  border-radius: 18px 18px 0 0;
+  isolation: isolate;
+  z-index: 2;
+}
+
+.scene-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+}
+
+.scene-background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s ease;
+}
+
+.experience-card:hover .scene-background img {
+  transform: scale(1.045);
+}
+
+.scene-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, #07132b18, transparent 60%, #06132918);
+  border-radius: 18px 18px 0 0;
+}
+
+.scene-label {
+  /* Keep the experience number visible above the image, not over the artwork. */
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  z-index: 9;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 8px 12px;
+  color: white;
+  background: #111a3cdd;
+  border: 1px solid #ffffff60;
+  border-radius: 6px;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.scene-layer {
+  position: absolute;
+  display: block;
+  max-width: none;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+  transition:
+    transform .55s cubic-bezier(.2,.8,.2,1),
+    filter .45s ease;
+}
+
+/* Objects start near/inside the card, then pop outside only on card hover. */
+.layer-water {
+  width: 34%;
+  height: 36%;
+  right: 1%;
+  bottom: 2%;
+  z-index: 3;
+  transform: translate3d(0, 0, 10px) scale(.94);
+}
+
+/* Stone sits beside the Choose Date button, not beside the top image. */
+.layer-rock {
+  width: 31%;
+  height: 34%;
+  right: -1%;
+  bottom: -318px;
+  z-index: 7;
+  transform: translate3d(0, 0, 25px) scale(1);
+}
+
+.layer-boat {
+  width: 57%;
+  height: 76%;
+  left: 4%;
+  top: 10%;
+  z-index: 8;
+  transform: translate3d(0, 0, 45px) scale(.98);
+  filter: drop-shadow(0 8px 8px #0002);
+}
+
+.experience-card:hover .layer-water {
+  /* Water pushes out beyond the upper-right edge of the scene. */
+  transform: translate3d(80%, -70%, 10px) scale(1.72);
+}
+
+.experience-card:hover .layer-rock {
+  /* Stone comes out beside the Choose Date button at the lower-right. */
+  transform: translate3d(50%, 70%, 25px) scale(1.68);
+}
+
+.experience-card:hover .layer-boat {
+  /* Push the boat much farther beyond the card edge on hover. */
+  transform: translate3d(-80%, -50%, 45px) scale(2.5);
+  filter: drop-shadow(0 17px 13px #0005);
+}
+
+/* Camping cutouts: tent exits upper-left, tree upper-right, stone by button. */
+.layer-camp-rock {
+  width: 38%;
+  height: 40%;
+  right: -1%;
+  bottom: -300px;
+  z-index: 7;
+  transform: translate3d(0, 0, 25px) scale(.98);
+}
+
+.layer-tree {
+  width: 39%;
+  height: 60%;
+  right: 2%;
+  top: 8%;
+  z-index: 4;
+  transform: translate3d(0, 0, 20px) scale(.92);
+}
+
+.layer-tent {
+  /* Tent is larger even before hover, while staying in the upper-left area. */
+  width: 42%;
+  height: 100%;
+  left: -1%;
+  top: 10%;
+  z-index: 8;
+  transform: translate3d(0, 0, 45px) scale(1.04);
+  filter: drop-shadow(0 8px 8px #0002);
+}
+
+.experience-card:hover .layer-camp-rock {
+  transform: translate3d(40%, 50%, 25px) scale(1.4);
+}
+
+.experience-card:hover .layer-tree {
+  /* Tree position stays close to the current reference; only a gentle pop. */
+  transform: translate3d(60%, -40%, 20px) scale(1.50);
+}
+
+.experience-card:hover .layer-tent {
+  /* Tent moves well beyond the card edge, matching the stronger reference effect. */
+  transform: translate3d(-50%, -50%, 45px) scale(2.2);
+  filter: drop-shadow(0 17px 13px #0005);
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+  min-height: 250px;
+  padding: 20px 20px 22px;
+  text-align: center;
+  background: #fff;
+  border-radius: 0 0 19px 19px;
+}
+
+.card-category {
+  color: #0331ffb4;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+}
+
+.card-content h1 {
+  margin: 7px 0 2px;
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.price-line {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 7px;
+}
+
+.price-line strong {
+  font-size: 26px;
+  letter-spacing: -.7px;
+}
+
+.price-line span {
+  color: #6f748a;
+  font-size: 13px;
+}
+
+.per-person {
+  display: block;
+  color: #858ba0;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.card-location {
+  margin: 17px 0 7px;
+  color: #626982;
+  font-size: 12px;
+}
+
+.card-description {
+  margin: 8px auto 16px;
+  max-width: 260px;
+  color: #7c8297;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.choose-date-main {
+  min-width: 125px;
+  padding: 12px 18px;
+  color: white;
+  background: #171b50;
+  border: 0;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 750;
+  box-shadow: 0 7px 16px #171b5025;
+  transition: transform .2s, background .2s;
+}
+
+.choose-date-main:hover,
+.confirm-button:hover {
+  transform: translateY(-2px);
+  background: #292e70;
+}
+
+/* Booking details panel on the right */
+.booking-panel {
+  padding: 23px 18px 18px;
+  border: 1px solid #292f68;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #7e7f8b, #111638);
+  box-shadow: 0 20px 50px #0003;
+}
+
+.panel-title {
+  margin: 0 0 20px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.booking-item {
+  margin-bottom: 9px;
+  padding: 13px 11px 10px;
+  border: 1px solid #30376f;
+  border-radius: 9px;
+  background: #1c2258;
+}
+
+.booking-item-top,
+.booking-item-bottom,
+.payable-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+}
+
+.booking-item-top {
+  font-size: 11px;
+}
+
+.booking-item-top strong:last-child {
+  white-space: nowrap;
+}
+
+.booking-item-bottom {
+  margin-top: 13px;
+  color: #929bc5;
+  font-size: 10px;
+}
+
+.booking-item-bottom button {
+  padding: 6px 8px;
+  color: #e7e8fa;
+  background: #282f70;
+  border: 0;
+  border-radius: 5px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.booking-item-bottom button:hover {
+  background: #39418d;
+}
+
+.booked-status {
+  color: #9fe7c4;
+}
+
+.payable-row {
+  margin-top: 20px;
+  padding-top: 17px;
+  border-top: 1px solid #343b70;
+  font-size: 11px;
+}
+
+.payable-row strong {
+  color: #f1edce;
+  font-size: 16px;
+}
+
+.panel-note {
+  margin: 13px 0 0;
+  color: #8f99c4;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.footer {
+  min-height: 64px;
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid #20264d;
+  color: #7f8bb7;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+}
+
+/* Date and confirmation modals */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  background: #030619c9;
+  backdrop-filter: blur(8px);
+  animation: fade-in .2s ease;
+}
+
+.date-modal {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 30px;
+  color: #f8f8ff;
+  background: linear-gradient(145deg, #4c57bb, #101634);
+  border: 1px solid #aab3f7;
+  border-radius: 18px;
+  box-shadow: 0 25px 90px #0008;
+  animation: modal-enter .25s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  color: #c6cbea;
+  background: #2f2fd4;
+  border: 0;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+.date-modal h2 {
+  margin: 10px 0 7px;
+  font-size: 27px;
+ 
+}
+
+.modal-subtitle {
+  margin: 0 0 23px;
+  color: #a7afd6;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.date-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #c2c9e7;
+  font-size: 12px;
+}
+
+.date-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  color: white;
+  color-scheme: dark;
+  background: #0e1434;
+  border: 1px solid #424a80;
+  border-radius: 8px;
+}
+
+.quick-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 12px 0 20px;
+}
+
+.quick-dates button {
+  padding: 8px 10px;
+  color: #dfe3fb;
+  background: #252b65;
+  border: 1px solid #3a427b;
+  border-radius: 7px;
+  font-size: 10px;
+}
+
+.quick-dates button:hover {
+  background: #353d83;
+}
+
+.guest-select-row,
+.modal-total,
+.confirmation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #bdc5e5;
+  font-size: 13px;
+}
+
+.guest-control {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 4px;
+  background: #0e1434;
+  border-radius: 22px;
+}
+
+.guest-control button {
+  width: 29px;
+  height: 29px;
+  color: white;
+  background: #292f6e;
+  border: 0;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.guest-control strong {
+  color: white;
+  min-width: 12px;
+  text-align: center;
+}
+
+.modal-total {
+  margin: 22px 0;
+  padding-top: 17px;
+  border-top: 1px solid #343b70;
+}
+
+.modal-total strong {
+  color: #f1edce;
+  font-size: 24px;
+}
+
+.confirm-button {
+  width: 100%;
+  min-height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #171b40;
+  background: #f1edce;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  transition: transform .2s, background .2s;
+}
+
+.confirm-button:hover {
+  color: white;
+}
+
+.confirm-button:disabled {
+  color: #9da2ba;
+  background: #363b60;
+  transform: none;
+}
+
+.success-icon {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 18px;
+  display: grid;
+  place-items: center;
+  color: #101735;
+  background: #a5ebc6;
+  border-radius: 50%;
+  font-size: 25px;
+}
+
+.confirmation-row {
+  padding: 12px 0;
+  border-bottom: 1px solid #343b70;
+}
+
+.confirmation-row strong {
+  color: white;
+}
+
+.demo-note {
+  margin: 18px 0;
+  color: #9da8d0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(12px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive layout */
+@media (max-width: 760px) {
+  .navbar {
+    min-height: 68px;
+    padding: 0 5%;
+  }
+
+  .brand {
+    font-size: 30px;
+  }
+
+  .nav-caption {
+    display: none;
+  }
+
+  .main-layout {
+    width: min(92%, 440px);
+    padding: 36px 0 48px;
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .experience-tabs {
+    margin-bottom: 34px;
+  }
+
+  .experience-card {
+    width: min(88%, 330px);
+  }
+
+  .scene {
+    height: clamp(185px, 55vw, 220px);
+  }
+
+  .booking-panel {
+    width: 100%;
+  }
+
+  .footer {
+    padding: 18px 5%;
+    font-size: 8px;
+    letter-spacing: .8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .experience-tabs button {
+    min-width: 100px;
+    padding: 11px 12px;
+  }
+
+  .date-modal {
+    padding: 25px 20px;
+  }
+
+  .card-content h1 {
+    font-size: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
