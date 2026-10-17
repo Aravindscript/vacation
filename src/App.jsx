@@ -39,7 +39,7 @@ const adventures = {
     layers: [
       { src: `${import.meta.env.BASE_URL}images/tent.png`, className: "layer-camp-rock", alt: "Mossy rock" },
       { src: `${import.meta.env.BASE_URL}images/tree.png`, className: "layer-tree", alt: "Forest tree" },
-      { src: `${import.meta.env.BASE_URL}images/tent.png`, className: "layer-tent", alt: "Camping tent" },
+      { src: `${import.meta.env.BASE_URL}images/rock.png`, className: "layer-tent", alt: "Camping tent" },
     ],
   },
 };
