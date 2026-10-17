@@ -37,9 +37,9 @@ const adventures = {
     description: "Enjoy a peaceful night surrounded by nature.",
    background: `${import.meta.env.BASE_URL}images/grass.jpg`,
     layers: [
-      { src: `${import.meta.env.BASE_URL}images/tent.png`, className: "layer-camp-rock", alt: "Mossy rock" },
+      { src: `${import.meta.env.BASE_URL}images/rock.png`, className: "layer-camp-rock", alt: "Mossy rock" },
       { src: `${import.meta.env.BASE_URL}images/tree.png`, className: "layer-tree", alt: "Forest tree" },
-      { src: `${import.meta.env.BASE_URL}images/rock.png`, className: "layer-tent", alt: "Camping tent" },
+      { src: `${import.meta.env.BASE_URL}images/tent.png`, className: "layer-tent", alt: "Camping tent" },
     ],
   },
 };
