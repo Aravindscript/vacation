@@ -9,12 +9,24 @@ const adventures = {
     duration: "4hrs",
     location: "Azure Beach, India",
     description: "Explore turquoise waters and discover the coastline.",
-    background: "/images/sea.jpg",
+    background: `${import.meta.env.BASE_URL}images/sea.jpg`,
     layers: [
-      { src: "/images/water.png", className: "layer-water", alt: "Ocean water" },
-      { src: "/images/rock.png", className: "layer-rock", alt: "Coastal rock" },
-      { src: "/images/boat.png", className: "layer-boat", alt: "Kayak boat" },
-    ],
+  {
+    src: `${import.meta.env.BASE_URL}images/water.png`,
+    className: "layer-water",
+    alt: "Ocean water",
+  },
+  {
+    src: `${import.meta.env.BASE_URL}images/rock.png`,
+    className: "layer-rock",
+    alt: "Coastal rock",
+  },
+  {
+    src: `${import.meta.env.BASE_URL}images/boat.png`,
+    className: "layer-boat",
+    alt: "Kayak boat",
+  },
+],
   },
   camping: {
     id: "camping",
@@ -23,11 +35,11 @@ const adventures = {
     duration: "8hrs",
     location: "Pine Valley, India",
     description: "Enjoy a peaceful night surrounded by nature.",
-    background: "/images/grass.jpg",
+   background: `${import.meta.env.BASE_URL}images/grass.jpg`,
     layers: [
-      { src: "/images/rock.png", className: "layer-camp-rock", alt: "Mossy rock" },
-      { src: "/images/tree.png", className: "layer-tree", alt: "Forest tree" },
-      { src: "/images/tent.png", className: "layer-tent", alt: "Camping tent" },
+      { src: `${import.meta.env.BASE_URL}images/tent.png`, className: "layer-camp-rock", alt: "Mossy rock" },
+      { src: `${import.meta.env.BASE_URL}images/tree.png`, className: "layer-tree", alt: "Forest tree" },
+      { src: `${import.meta.env.BASE_URL}images/tent.png`, className: "layer-tent", alt: "Camping tent" },
     ],
   },
 };
